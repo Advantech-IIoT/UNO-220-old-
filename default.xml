@@ -12,4 +12,11 @@
     path="kernel"
     clone-depth="1"
     />
+  <project
+    remote="advantech-iiot" 
+    revision="image/iocard" 
+    name="uno-220.git" 
+    path="image"
+    clone-depth="1"
+    />
 </manifest>
