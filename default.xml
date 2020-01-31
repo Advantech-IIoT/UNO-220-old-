@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <default sync-j="2"/>
+  <remote 
+    fetch="https://github.com/Advantech-IIoT"
+    name="advantech-iiot"
+    />
+  <project
+    remote="advantech-iiot" 
+    revision="raspbian/kernel" 
+    name="uno-220.git" 
+    path="kernel"
+    clone-depth="1"
+    />
+</manifest>
