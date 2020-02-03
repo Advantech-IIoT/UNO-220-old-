@@ -1,7 +1,7 @@
 ##################################
 # folders                        #
 ##################################
-currdir=$(shell realpath -m $(PWD))
+currdir=$(shell pwd)
 builddir=$(shell realpath -m $(currdir)/build)
 toolsdir=$(shell realpath -m $(builddir)/tools)
 kerneldir=$(shell realpath -m $(builddir)/kernel)
