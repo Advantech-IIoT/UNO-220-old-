@@ -10,6 +10,7 @@ examplesdir=$(shell realpath -m $(currdir)/examples)
 configsdir=$(shell realpath -m $(currdir)/configs)
 appdir=$(shell realpath -m $(exampledir)/app)
 drvdir=$(shell realpath -m $(exampledir)/drv)
+rootfs=$(shell realpath -m $(builddir)/rootfs)
 ##################################
 # files                          #
 ##################################
@@ -75,8 +76,9 @@ $(builddir)/.clone_modules:
 	@cp -a $(currdir)/modules $(builddir)
 	@touch $@
 
-$(builddir)/.build_modules:
+$(builddir)/.build_modules: $(rootfs)
 	@make -C $(kerneldir) O=$(kbuilddir) M=$(builddir)/modules/rtc
+	@make -C $(kerneldir) O=$(kbuilddir) M=$(builddir)/modules/rtc modules_install INSTALL_MOD_PATH=$(rootfs)
 
 $(builddir)/.prepare_drv:
 	@make -C $(kerneldir) O=$(kbuilddir) modules_prepare
@@ -110,7 +112,7 @@ menuconfig:
 clean: 
 	@rm -rf $(builddir)
 
-$(builddir): 
+$(builddir) $(rootfs): 
 	@mkdir -p $@
 
 check: 
