@@ -3,9 +3,13 @@ Create Raspbian Image for UNO-220
 
 ### Prerequisite
 ---
+- **[Project Github Link](https://github.com/Advantech-IIoT/uno-220/tree/master)**
 - **[Raspberry pi 4 model b](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/)**
 - **Advantech UNO-220 (IO extender)**
 - **SD card (over 8GB recommanded)**
+- **Host PC**
+  - Ubuntu 16.04 (x86_64) recommanded
+  - This guide uses Virtualbox with Ubutuntu 16.04 x86_64 image.
 
 ### UNO-220 Information
 ---
@@ -13,7 +17,33 @@ Create Raspbian Image for UNO-220
 - **RTC RX-8010SJ-B**
 - **Serial to RS-232/485** 
 
-### Download Raspbian Debian Buster Full Image
+### Build Raspbian Debian Buster Full Image Sample Code
+---
+- **Clone project source from Github**
+  ```
+  $ git clone --depth=1 -b project/iocard https://github.com/Advantech-IIoT/uno-220.git project/iocard
+  ```
+- **Fetch project source**
+  ```
+  $ cd project/iocard
+  $ make 
+  ```
+- **Build image**
+  ```
+  $ cd build/image
+  $ make 
+  ```
+- **Imgae location**
+  ```
+  $ ls build/2019-09-26-raspbian-buster-full.img
+  ```
+- **Write image to SD card**
+  Please check your SD card device in your system, the naming rule will be `/dev/sdx`. This following example is to use `/dev/sde`. 
+  ```
+  ./scripts/writesdimage.sh -d /dev/sde -i build/2019-09-26-raspbian-buster-full.img
+  ```
+
+### Official Raspbian Debian Buster Full Image
 ---
 - **Download Image**
   ```
@@ -42,10 +72,12 @@ Create Raspbian Image for UNO-220
 - [Toolchain](https://github.com/raspberrypi/tools.git)
 
 
-### Compile RTC Driver
+### Compile RTC Driver only (For kernel changed)
 ---
 - **Clone `project/iocard` from github repository.**
 
+  If you want to change the kernel, please modify the kernel source git URL in Makefile first . 
+  
   ```
   $ git clone --depth 1 -b prject/iocard https://github.com/Advantech-IIoT/uno-220.git
   $ cd build/kernel
