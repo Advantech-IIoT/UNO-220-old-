@@ -37,6 +37,7 @@ Create Raspbian Image for UNO-220
   ```
   $ ls build/2019-09-26-raspbian-buster-full.img
   ```
+
 ### Write image to SD card
 ---
   Please check your SD card device in your system, the naming rule will be `/dev/sdx`. This following example is to use `/dev/sde`. 
