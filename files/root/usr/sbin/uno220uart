@@ -1,0 +1,229 @@
+#!/bin/bash
+app=$(basename $0)
+config=/boot/config.txt
+config_bkp=${config}.bkp
+cmdline=/boot/cmdline.txt
+cmdline_console=${cmdline}.console
+cmdline_bkp=${cmdline}.bkp
+console_cmd="console=serial0,115200 console=tty1"
+cmd=
+boot=1
+kernel=0
+systemd=0
+######################################
+#                Notes               #
+######################################
+# backup console parameters
+## cat /boot/cmdline.txt | awk 'BEGIN{FS="=";RS=" "}; /console/{printf("%s=%s ",$1,$2);} ' > /tmp/cmdline.console.txt
+# remove 'console' parameters
+## sed -e "s/console=[^ ]*//g" -e "s/^ *//" cmdline.txt
+# dump [all] section content
+## cat /boot/config.txt  | awk 'BEGIN{RS="\[all\]"} NR==2{print $0}' | awk 'BEGIN{RS="\[.*\]"} NR==1{print $0}'
+# enable uart in config.txt
+## cat config.txt | sed -e '/enable_uart=/d' -e '/\[all\]/aenable_uart=1'
+######################################
+#             Functions              #
+######################################
+backupCmdline(){
+  cp -a $cmdline $cmdline_bkp
+}
+backupConsoleCmdline(){
+  [ ! "$#" -eq "1" ] && echo "backupConsoleCmdline: need more parameters..." && return 1
+  cat ${cmdline} | awk 'BEGIN{FS="=";RS=" "}; /console/{printf("%s=%s ",$1,$2);} ' > $1
+  return 0
+}
+removeConsoleCmdline(){
+  [ ! "$#" -eq "1" ] && echo "removeConsoleCmdline: need more parameters..." && return 1
+  sed -i -e "s/console=[^ ]*//g" -e "s/^ *//" $1
+  return 0
+}
+insertConsoleCmdline(){
+  [ ! "$#" -eq "2" ] && echo "insertConsoleCmdline: need more parameters..." && return 1
+  sed -i -e "s/^/$2 /" $1
+  return 0
+}
+disableConsoleCmdlineFunc(){
+#  backupCmdline
+#  backupConsoleCmdline $cmdline_console
+#  ret=$?
+#  [ "$ret" -eq "1" ] && echo "error: backupConsoleCmdline" && exit 1
+  removeConsoleCmdline $cmdline
+  ret=$?
+  [ "$ret" -eq "1" ] && echo "error: removeConsoleCmdline" && return 1
+  return 0
+}
+enableConsoleCmdlineFunc(){
+  removeConsoleCmdline $cmdline
+  ret=$?
+  [ "$ret" -eq "1" ] && echo "error: removeConsoleCmdline" && return 1
+  insertConsoleCmdline $cmdline "$console_cmd"
+  ret=$?
+  [ "$ret" -eq "1" ] && echo "error: insertConsoleCmdline" && return 1
+  return 0
+}
+disableConsoleConfigFunc(){
+  sed -i -e '/enable_uart=/d' $config
+}
+enableConsoleConfigFunc(){
+  sed -i -e '/enable_uart=/d' -e '/\[all\]/aenable_uart=1' $config
+}
+disableConsoleSystemdFunc(){
+  echo "disableConsoleSystemdFunc: execute command as below by manual"
+  echo "systemctl disable serial-getty@ttyS0.service"
+  systemctl stop serial-getty@ttyS0.service
+  systemctl disable serial-getty@ttyS0.service
+}
+enableConsoleSystemdFunc(){
+  echo "enableConsoleSystemdFunc: execute command as below by manual"
+  echo "systemctl enable serial-getty@ttyS0.service"
+  systemctl start serial-getty@ttyS0.service
+  systemctl enable serial-getty@ttyS0.service
+}
+testFunc(){
+  exit 0; 
+}
+usage(){
+cat << EOF
+Usage: $app [OPTIONS]...
+  OPTIONS: 
+    -d, --disable                    disable uart
+    -e, --enable                     enable uart
+    -s, --status                     show status
+    -S [0|1], --systemd=[0|1]                     
+    -b [0|1], --boot=[0|1]                       
+    -k [0|1], --kernel=[0|1]
+    -h, --help                       show this usage
+    --test                           test Function
+  Examples: 
+    # show status
+    $app --status 
+    # enable uart pin, but disable kernel and systemd console 
+    $app --kernel=0 --systemd=0 --enable 
+    # disable uart pin, but enable kernel and systemd console 
+    $app --kernel=0 --systemd=0 --disable 
+EOF
+  exit 0
+}
+statusFunc(){
+  echo "Status:"
+  printf "  %-25s: %s\n" "boot" "$boot"
+  printf "  %-25s: %s\n" "kernel" "$kernel"
+  printf "  %-25s: %s\n" "systemd" "$systemd"
+  printf "  %-25s: %s\n" "cmdline" "$(cat $cmdline)"
+#  [ -f "$cmdline_console" ] && printf "  %-25s: %s\n" "console cmdline backup" "$(cat $cmdline_console)"
+#  [ -f "$cmdline_bkp" ] && printf "  %-25s: %s\n" "cmdline backup" "$(cat $cmdline_bkp)"
+#  printf "  %-25s: %s\n" "console_cmd" "$console_cmd"
+  printf "  $config: \n"
+  printf "    %-25s: %s\n" "enable_uart" "$(cat $config | grep -q "^enable_uart=1"; [ $? -eq 0 ] && echo 1 || echo 0)"
+  exit 0
+}
+checkBool(){
+  re='^[01]$'
+  if ! [[ $1 =~ $re ]] ; then
+    echo 1
+  else
+    echo 0
+  fi
+}
+######################################
+#              Options               #
+######################################
+while getopts "b:k:S:sh-:" o; do
+  case $o in
+    -)
+      val=${OPTARG#*=}
+      opt=${OPTARG%=$val}
+      val=${OPTARG#$opt}
+      val=${val/=/}
+      case $opt in
+        param1)
+          [ $(checkBool $val) -eq 1 ] && usage
+	  param1=$val
+	;;
+        boot)
+          [ $(checkBool $val) -eq 1 ] && usage
+	  boot=$val
+	;;
+        kernel)
+          [ $(checkBool $val) -eq 1 ] && usage
+	  kernel=$val
+	;;
+        systemd)
+          [ $(checkBool $val) -eq 1 ] && usage
+	  systemd=$val
+	;;
+        status)
+          cmd=status
+	;;
+        disable)
+          cmd=disable
+	;;
+        enable)
+          cmd=enable
+	;;
+        test)
+          cmd=test
+	;;
+        help)
+          usage
+	;;
+        *)
+          usage
+	;;
+      esac
+      ;;
+    e)
+      cmd=enable
+      ;;
+    d)
+      cmd=disable
+      ;;
+    h)
+      usage
+      ;;
+    s)
+      showStatus
+      ;;
+    b)
+      [ $(checkBool $OPTARG) -eq 1 ] && usage
+      boot=$OPTARG
+    ;;
+    k)
+      [ $(checkBool $OPTARG) -eq 1 ] && usage
+      kernel=$OPTARG
+    ;;
+    S)
+      [ $(checkBool $OPTARG) -eq 1 ] && usage
+       systemd=$OPTARG
+    ;;
+    *)
+      #echo "$o, ind='$OPTIND', arg='$OPTARG', err='$OPTERR'"
+      usage
+      ;;
+  esac
+done
+shift $((OPTIND-1))
+[ "$#" -ne 0 ] && usage
+case $cmd in 
+  enable)
+    [ $boot -eq 1 ] && enableConsoleConfigFunc || disableConsoleConfigFunc
+    [ $kernel -eq 1 ] && enableConsoleCmdlineFunc || disableConsoleCmdlineFunc
+    [ $systemd -eq 1 ] && enableConsoleSystemdFunc || disableConsoleSystemdFunc
+    sync
+    ;;
+  disable)
+    [ $boot -eq 1 ] && disableConsoleConfigFunc || enableConsoleConfigFunc
+    [ $kernel -eq 1 ] && disableConsoleCmdlineFunc || enableConsoleCmdlineFunc
+    [ $systemd -eq 1 ] && disableConsoleSystemdFunc || enableConsoleSystemdFunc
+    sync
+    ;;
+  test)
+    testFunc
+    ;;
+  status)
+    statusFunc
+    ;;
+  *)
+    usage
+    ;;
+esac
