@@ -15,10 +15,6 @@ all: $(builddir)/.fetch_repo $(builddir)/.fetch_project
 
 repo: $(builddir)/.fetch_repo
 
-test:
-#	@git clone $(repogiturl) $(repo) && cd $(repo) && git checkout v1.13.9.4
-	@git clone --branch v1.13.9.4 $(repogiturl) $(repodir)
-
 version:
 	@$(repo) version
 
