@@ -16,11 +16,14 @@ image=$(realpath -m ${image})
 imagedir=$(dirname ${image})
 imagename=$(echo $image | sed -e "s%/.*/\([^/]*\)%\1%")
 server=172.20.2.87
+date=20200302
 remotedir=/TestArea/Linux/EmbeddedLinux/UNO-220-IO
 ftp -n << EOF
 open $server
 user $user $pass
 cd $remotedir
+mkdir $date
+cd $date
 lcd $imagedir
 put $imagename.md5
 put $imagename.sha1

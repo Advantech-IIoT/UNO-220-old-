@@ -3,7 +3,10 @@ currdir=$(shell pwd)
 -include $(currdir)/macro.mk
 -include $(currdir)/define.mk
 
-.PHONY: all test clean install
+.PHONY: all test clean install fetch mount \
+	enable_i2c_config modules depmod \
+	disable_console_cmdline enable_console_config \
+	clone_files umount checksum host_tools
 
 all: $(builddir) fetch mount \
 	enable_i2c_config modules depmod \
@@ -43,8 +46,8 @@ umount:
 	@$(call umountroot)
 
 mountsd:
-	@mount /dev/sde1 $(builddir)/boot
-	@mount /dev/sde2 $(builddir)/root
+	@mount $(sddev1) $(builddir)/boot
+	@mount $(sddev2) $(builddir)/root
 
 umountsd:
 	@umount $(builddir)/boot
