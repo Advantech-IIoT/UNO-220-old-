@@ -69,9 +69,12 @@ Create Raspbian Image for UNO-220
 
   ```
 
-**INPORTANT: Official raspbain image doesn't include UNO-220's RTC driver(rtc-rx8010).**
+**INPORTANT!!**
 
-**If you update your system or kernel, please add driver by manual.**
+Official raspbain image doesn't include UNO-220's RTC driver(rtc-rx8010).
+
+If you update your system or kernel, please add driver by manual.
+
              
 ### Quick Way to Add RTC Drvier
 
