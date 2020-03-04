@@ -69,6 +69,31 @@ Create Raspbian Image for UNO-220
 
   ```
 
+**INPORTANT: Official raspbain image doesn't include UNO-220's RTC driver(rtc-rx8010).**
+
+**If you update your system or kernel, please add driver by manual.**
+             
+### Quick Way to Add RTC Drvier
+
+The kernel version in UNO-220's SD card is `4.19.75-v7l+`. 
+
+If you update your system or kernel, you can follow the quick way to add driver. 
+
+Check your kernel version and rtc driver: 
+
+```
+$ uname -r
+$ ls /lib/modules/$(uname -r)/extra/rtc-rx8010.ko
+```
+
+If not exists, please copy it into your current release. 
+
+```
+$ sudo mkdir -p /lib/modules/$(uname -r)/extra
+$ sudo cp -a /lib/modules/4.19.75-v7l+/extra/rtc-rx8010.ko /lib/modules/$(uname -r)/extra/rtc-rx8010.ko
+$ sudo depmod -a 
+```
+
 ### Raspbian Image Compiler and Kernel Source
 ---
 - [Kernel Source](https://github.com/raspberrypi/linux.git)
