@@ -69,3 +69,9 @@ endef
 define enableconsoleconfig
   ( sed -i -e '/enable_uart=1/d' -e '/\[all\]/aenable_uart=1' $(1) )
 endef
+define disableforcehdmihotplug
+  ( sed -i -e 's/.*hdmi_force_hotplug=.*/#hdmi_force_hotplug=1/' $(1) )
+endef
+define enableforcehdmihotplug
+  ( sed -i -e 's/.*hdmi_force_hotplug=.*/hdmi_force_hotplug=1/' $(1) )
+endef

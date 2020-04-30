@@ -12,6 +12,8 @@
  - Based on 2019-09-26-raspbian-buster-full.img
 ------------------------------------------------------------------
  Change List
+ - Version 0.0.1 (2020/04/30): 
+   - Enable hdmi_force_hotplug in configs.txt
  - Version 0.0.1 (2020/03/02): 
    - Fix the system time not synchronized with realtime clock hardware when boot-up. 
  - Version 0.0.1 (2020/02/10): 

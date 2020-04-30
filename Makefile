@@ -11,6 +11,7 @@ currdir=$(shell pwd)
 all: $(builddir) fetch mount \
 	enable_i2c_config modules depmod \
 	disable_console_cmdline enable_console_config \
+	disable_force_hdmi_hotplug enable_force_hdmi_hotplug \
 	clone_files umount checksum host_tools
 
 clone_files:
@@ -36,6 +37,12 @@ enable_console_config:
 
 disable_console_config:
 	@$(call disableconsoleconfig,$(builddir)/boot/config.txt)
+
+enable_force_hdmi_hotplug:
+	@$(call enableforcehdmihotplug,$(builddir)/boot/config.txt)
+
+disable_force_hdmi_hotplug: 
+	@$(call disableforcehdmihotplug,$(builddir)/boot/config.txt)
 
 mount: 
 	@$(call mountboot)
