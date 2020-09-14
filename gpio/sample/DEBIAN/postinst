@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "__name__: ${BASH_SOURCE[0]}"
+currdir=$(dirname $(realpath ${BASH_SOURCE[0]}))
+modprobe gpio-pca953x
+echo "pca9554 0x27" > /sys/class/i2c-adapter/i2c-1/new_device

@@ -1,0 +1,7 @@
+#!/bin/bash
+echo "__name__: ${BASH_SOURCE[0]}"
+currdir=$(dirname $(realpath ${BASH_SOURCE[0]}))
+udevadm control --reload-rules && udevadm trigger
+modprobe i2c_dev
+modprobe rtc_rx8010
+echo "rx8010 0x32" > /sys/class/i2c-adapter/i2c-1/new_device

@@ -1,0 +1,9 @@
+#!/bin/bash
+echo "__name__: ${BASH_SOURCE[0]}"
+currdir=$(dirname $(realpath ${BASH_SOURCE[0]}))
+# echo currdir=$currdir
+# ls $currdir
+mkdir -p /lib/modules/$(uname -r)/kernel/drivers/rtc
+cp -a $currdir/rtc-rx8010.ko /lib/modules/$(uname -r)/kernel/drivers/rtc
+depmod -a
+

@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "__name__: ${BASH_SOURCE[0]}"
+currdir=$(dirname $(realpath ${BASH_SOURCE[0]}))
+# echo currdir=$currdir
+# ls $currdir
