@@ -105,14 +105,21 @@ $ sudo depmod -a
 
 ### Compile RTC Driver
 ---
-- **Clone `project/iocard` from github repository.**
+- **Clone [raspbian/kernel](https://github.com/Advantech-IIoT/uno-220/tree/raspbian/kernel) from github repository.**
 
-  If you want to change the kernel, please modify the kernel source git URL in Makefile first . 
+  If you want to change the kernel, please modify the kernel source git URL and branch in [Makefile](https://github.com/Advantech-IIoT/uno-220/blob/raspbian/kernel/Makefile) first . 
   
   ```
   $ git clone --depth 1 -b raspbian/kernel https://github.com/Advantech-IIoT/uno-220.git
   $ cd build/kernel
   $ make modules
+  ```
+
+  Raspberry PI 4 kernel source git url and branch definition: 
+  
+  ```
+  rpikernelurl=https://github.com/raspberrypi/linux.git
+  rpikernelbranch=raspberrypi-kernel_1.20190925-1
   ```
 
 - **Then, rtc driver will be located in the path as below.**
