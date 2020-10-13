@@ -12,7 +12,7 @@ Create Raspbian Image for UNO-220
   - This guide uses Virtualbox with Ubutuntu 16.04 x86_64 image.
   - Packages needs to be installed in host ubuntu. 
     ```
-    $ apt-get install bison flex libssl-dev
+    $ apt-get install -y bison flex libssl-dev
     ```
 
 ### UNO-220 Information
