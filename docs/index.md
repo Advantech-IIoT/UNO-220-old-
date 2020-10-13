@@ -10,6 +10,10 @@ Create Raspbian Image for UNO-220
 - **Host PC**
   - Ubuntu 16.04 (x86_64) recommanded
   - This guide uses Virtualbox with Ubutuntu 16.04 x86_64 image.
+  - Packages needs to be installed in host ubuntu. 
+    ```
+    $ apt-get install bison flex libssl-dev
+    ```
 
 ### UNO-220 Information
 ---
