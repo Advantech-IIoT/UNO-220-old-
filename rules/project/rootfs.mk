@@ -1,0 +1,4 @@
+
+$(rootfs): 
+	@mkdir -p $@
+

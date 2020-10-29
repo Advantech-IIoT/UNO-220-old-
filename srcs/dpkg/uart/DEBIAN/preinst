@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "__name__: ${BASH_SOURCE[0]}"
+# sed -i -e '/enable_uart=1/d' /boot/config.txt
+# sed -i -e "s/console=[^ ]*//g" -e "s/^ *//" /boot/cmdline.txt

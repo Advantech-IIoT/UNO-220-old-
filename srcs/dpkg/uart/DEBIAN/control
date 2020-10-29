@@ -1,0 +1,6 @@
+Package: __name__
+Version: __version__-__revision__
+Architecture: __arch__
+Description: __desc__
+Maintainer: __editor__
+Depends: __depends__

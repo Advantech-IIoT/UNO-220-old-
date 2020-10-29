@@ -1,0 +1,6 @@
+#!/bin/bash
+echo "__name__: ${BASH_SOURCE[0]}"
+# if [ ${RUNLEVEL:-x} == "x" ] || [ $RUNLEVEL -ne 1 ] ; then
+#   modprobe gpio-pca953x
+#   echo "pca9554 0x27" > /sys/class/i2c-adapter/i2c-1/new_device
+# fi

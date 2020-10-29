@@ -1,0 +1,7 @@
+#!/bin/bash
+echo "__name__: ${BASH_SOURCE[0]}"
+# if [ ${RUNLEVEL:-x} == "x" ] || [ $RUNLEVEL -ne 1 ] ; then
+#   depmod -a
+# else
+#   depmod -b / __kernel_version__ -A -a 
+# fi

@@ -1,0 +1,12 @@
+#!/bin/bash
+echo "__name__: ${BASH_SOURCE[0]}"
+cat << EOF
+
+#########################################################
+#                                                       #
+# Please continue to install reset of uno-220 packages. #
+# After installation is done, please reboot your Pi 4.  #
+#                                                       #
+#########################################################
+
+EOF

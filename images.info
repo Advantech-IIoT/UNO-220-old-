@@ -1,0 +1,177 @@
+
+# Desktop Full Info
+# Raspberry Pi reference 2020-08-20
+# Generated using pi-gen, https://github.com/RPi-Distro/pi-gen, 9a3a10bf1019ebb2d59053564dc6b90068bad27d, stage5
+# 
+# Firmware: https://github.com/raspberrypi/firmware/tree/ef72c17bcaaeb89093d87bcf71f3228e1b5e1fff
+# Kernel: https://github.com/raspberrypi/linux/tree/f2f7e4b23d8788e96f81a7522b2f703e51c53e70
+# Uname string: Linux version 5.4.51-v7+ (dom@buildbot) (gcc version 4.9.3 (crosstool-NG crosstool-ng-1.22.0-88-g8460611)) #1333 SMP Mon Aug 10 16:45:19 BST 2020
+# 
+imgfullname20200820=2020-08-20-raspios-buster-armhf-full.img
+imgfullurl20200820=http://downloads.raspberrypi.org/raspios_full_armhf/images/raspios_full_armhf-2020-08-24/2020-08-20-raspios-buster-armhf-full.zip
+imgnormalname20200820=2020-08-20-raspios-buster-armhf.img
+imgnormalurl20200820=http://downloads.raspberrypi.org/raspios_armhf/images/raspios_armhf-2020-08-24/2020-08-20-raspios-buster-armhf.zip
+imglitename20200820=2020-08-20-raspios-buster-armhf-lite.img
+imgliteurl20200820=http://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2020-08-24/2020-08-20-raspios-buster-armhf-lite.zip
+kernelversion20200820=5.4.51-v7l+
+kernelbranch20200820=raspberrypi-kernel_1.20200811-1
+kernel5.4.51-v7l+branch=raspberrypi-kernel_1.20200811-1
+kerneldefconfig20200820=bcm2711_defconfig
+kernelconfig20200820=$(configsdir)/kernel_config.20200820
+rootclone20200820=$(currdir)/srcs/root/root20190926
+
+# Desktop Full Info
+# Raspberry Pi reference 2020-05-27
+# Generated using pi-gen, https://github.com/RPi-Distro/pi-gen, 825107f04027269db77426046f5085475b1ea22f, stage5
+# 
+# Firmware: https://github.com/raspberrypi/firmware/tree/21e1fe3477ffb708a5736ed61a924fd650031136
+# Kernel: https://github.com/raspberrypi/linux/tree/fe2c7bf4cad4641dfb6f12712755515ab15815ca
+# Uname string: Linux version 4.19.118-v7+ (dom@buildbot) (gcc version 4.9.3 (crosstool-NG crosstool-ng-1.22.0-88-g8460611)) #1311 SMP Mon Apr 27 14:21:24 BST 2020
+# 
+imgfullname20200527=2020-05-27-raspios-buster-full-armhf.img
+imgfullurl20200527=http://downloads.raspberrypi.org/raspios_full_armhf/images/raspios_full_armhf-2020-05-28/2020-05-27-raspios-buster-full-armhf.zip
+imgnormalname20200527=2020-05-27-raspios-buster-armhf.img
+imgnormalurl20200527=http://downloads.raspberrypi.org/raspios_armhf/images/raspios_armhf-2020-05-28/2020-05-27-raspios-buster-armhf.zip
+imglitename20200527=2020-05-27-raspios-buster-lite-armhf.img
+imgliteurl20200527=http://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2020-05-28/2020-05-27-raspios-buster-lite-armhf.zip
+kernelversion20200527=4.19.118-v7l+
+kernelbranch20200527=raspberrypi-kernel_1.20200512-2
+kernel4.19.118-v7l+branch=raspberrypi-kernel_1.20200512-2
+kerneldefconfig20200527=bcm2711_defconfig
+kernelconfig20200527=$(configsdir)/kernel_config.20200527
+rootclone20200527=$(currdir)/srcs/root/root20190926
+
+# Desktop Full Info
+# Raspberry Pi reference 2020-02-13
+# Generated using pi-gen, https://github.com/RPi-Distro/pi-gen, 5f884374b6ac6e155330c58caa1fb7249b8badf1, stage5
+# 
+# Firmware: https://github.com/raspberrypi/firmware/tree/9a34efbf2fc6a27231607ce91a7cb6bf3bdbc0c5
+# Kernel: https://github.com/raspberrypi/linux/tree/f16e91dad2af9d57aef477cc1f522040353849f5
+# Uname string: Linux version 4.19.97-v7+ (dom@buildbot) (gcc version 4.9.3 (crosstool-NG crosstool-ng-1.22.0-88-g8460611)) #1294 SMP Thu Jan 30 13:15:58 GMT 2020
+# 
+imgfullname20200213=2020-02-13-raspbian-buster-full.img
+imgfullurl20200213=http://downloads.raspberrypi.org/raspbian_full/images/raspbian_full-2020-02-14/2020-02-13-raspbian-buster-full.zip
+imgnormalname20200213=2020-02-13-raspbian-buster.img
+imgnormalurl20200213=http://downloads.raspberrypi.org/raspbian/images/raspbian-2020-02-14/2020-02-13-raspbian-buster.zip
+imglitename20200213=2020-02-13-raspbian-buster-lite.img
+imgliteurl20200213=http://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2020-02-14/2020-02-13-raspbian-buster-lite.zip
+kernelversion20200213=4.19.97-v7l+
+kernelbranch20200213=raspberrypi-kernel_1.20200205-1
+kernel4.19.97-v7l+branch=raspberrypi-kernel_1.20200205-1
+kerneldefconfig20200213=bcm2711_defconfig
+kernelconfig20200213=$(configsdir)/kernel_config.20200213
+rootclone20200213=$(currdir)/srcs/root/root20190926
+
+# Desktop Full Info
+# Raspberry Pi reference 2020-02-05
+# Generated using pi-gen, https://github.com/RPi-Distro/pi-gen, e577677b623b577f2a0ec7cfaffc3c27da005da3, stage5
+# 
+# Firmware: https://github.com/raspberrypi/firmware/tree/149cd7f0487e08e148efe604f8d4d359541cecf4
+# Kernel: https://github.com/raspberrypi/linux/tree/f16e91dad2af9d57aef477cc1f522040353849f5
+# Uname string: Linux version 4.19.97-v7+ (dom@buildbot) (gcc version 4.9.3 (crosstool-NG crosstool-ng-1.22.0-88-g8460611)) #1294 SMP Thu Jan 30 13:15:58 GMT 2020
+# 
+imgfullname20200205=2020-02-05-raspbian-buster-full.img
+imgfullurl20200205=http://downloads.raspberrypi.org/raspbian_full/images/raspbian_full-2020-02-07/2020-02-05-raspbian-buster-full.zip
+imgnormalname20200205=2020-02-05-raspbian-buster.img
+imgnormalurl20200205=http://downloads.raspberrypi.org/raspbian/images/raspbian-2020-02-07/2020-02-05-raspbian-buster.zip
+imglitename20200205=2020-02-05-raspbian-buster-lite.img
+imgliteurl20200205=http://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2020-02-07/2020-02-05-raspbian-buster-lite.zip
+kernelversion20200205=4.19.97-v7l+
+kernelbranch20200205=raspberrypi-kernel_1.20200205-1
+kernel4.19.97-v7l+branch=raspberrypi-kernel_1.20200205-1
+kerneldefconfig20200205=bcm2711_defconfig
+kernelconfig20200205=$(configsdir)/kernel_config.20200205
+rootclone20200205=$(currdir)/srcs/root/root20190926
+
+# Desktop Full Info
+# Raspberry Pi reference 2019-09-26
+# Generated using pi-gen, https://github.com/RPi-Distro/pi-gen, 80d486687ea77d31fc3fc13cf3a2f8b464e129be, stage5
+# 
+# Firmware: https://github.com/raspberrypi/firmware/tree/01508e81ec1e918448227ca864616d56c430b46d
+# Kernel: https://github.com/raspberrypi/linux/tree/6d8bf28fa4b1ca0a35c0cd1dcb267fb216daf720
+# Uname string: Linux version 4.19.75-v7+ (dom@buildbot) (gcc version 4.9.3 (crosstool-NG crosstool-ng-1.22.0-88-g8460611)) #1270 SMP Tue Sep 24 18:45:11 BST 2019
+# 
+imgfullname20190926=2019-09-26-raspbian-buster-full.img
+imgfullurl20190926=http://downloads.raspberrypi.org/raspbian_full/images/raspbian_full-2019-09-30/2019-09-26-raspbian-buster-full.zip
+imgnormalname20190926=2019-09-26-raspbian-buster.img
+imgnormalurl20190926=http://downloads.raspberrypi.org/raspbian/images/raspbian-2019-09-30/2019-09-26-raspbian-buster.zip
+imglitename20190926=2019-09-26-raspbian-buster-lite.img
+imgliteurl20190926=http://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2019-09-30/2019-09-26-raspbian-buster-lite.zip
+kernelversion20190926=4.19.75-v7l+
+kernelbranch20190926=raspberrypi-kernel_1.20190925-1
+kernel4.19.75-v7l+branch=raspberrypi-kernel_1.20190925-1
+kerneldefconfig20190926=bcm2711_defconfig
+kernelconfig20190926=$(configsdir)/kernel_config
+rootclone20190926=$(currdir)/srcs/root/root20190926
+
+# Desktop Full Info
+# Raspberry Pi reference 2019-07-10
+# Generated using pi-gen, https://github.com/RPi-Distro/pi-gen, 175dfb027ffabd4b8d5080097af0e51ed9a4a56c, stage5
+# 
+# Firmware: https://github.com/raspberrypi/firmware/tree/356f5c2880a3c7e8774025aa6fc934a617553e7b
+# Kernel: https://github.com/raspberrypi/linux/tree/6e787b87ace9f945f17a9022288e2758ed281cf7
+# Uname string: Linux version 4.19.57-v7+ (dom@buildbot) (gcc version 4.9.3 (crosstool-NG crosstool-ng-1.22.0-88-g8460611)) #1244 SMP Thu Jul 4 18:45:25 BST 2019
+# 
+imgname20190710=2019-07-10-raspbian-buster-full.img
+imgurl20190710=http://downloads.raspberrypi.org/raspbian_full/images/raspbian_full-2019-07-12/2019-07-10-raspbian-buster-full.zip
+
+# Desktop Full Info
+# Raspberry Pi reference 2019-06-20
+# Generated using pi-gen, https://github.com/RPi-Distro/pi-gen, 150e25c4f8123a4c9c63e8dca1b4737fa6c1135c, stage5
+# 
+# Firmware: https://github.com/raspberrypi/firmware/tree/88ca9081f5e51cdedd16d5dbc85ed12a25123201
+# Kernel: https://github.com/raspberrypi/linux/tree/883a1a5bf14abc9b3a014a3907772cd0b3129c8a
+# Uname string: Linux version 4.19.50-v7+ (dom@buildbot) (gcc version 4.9.3 (crosstool-NG crosstool-ng-1.22.0-88-g8460611)) #896 SMP Thu Jun 20 16:11:44 BST 2019
+# 
+imgname20190620=2019-06-20-raspbian-buster-full.img
+imgurl20190620=http://downloads.raspberrypi.org/raspbian_full/images/raspbian_full-2019-06-24/2019-06-20-raspbian-buster-full.zip
+
+# Desktop Full Info
+# Raspberry Pi reference 2019-04-08
+# Generated using pi-gen, https://github.com/RPi-Distro/pi-gen, e910bf55ac92e27c6e77043e8995bcb5e0a2d742, stage5
+# 
+# Firmware: https://github.com/raspberrypi/firmware/tree/f8939644f7bd3065068787f1f92b3f3c79cf3de9
+# Kernel: https://github.com/raspberrypi/linux/tree/5d63a4595d32a8505590d5fea5c4ec1ca79fd49d
+# Uname string: Linux version 4.14.98-v7+ (dom@dom-XPS-13-9370) (gcc version 4.9.3 (crosstool-NG crosstool-ng-1.22.0-88-g8460611)) #1200 SMP Tue Feb 12 20:27:48 GMT 2019
+# 
+imgname20190408=2019-04-08-raspbian-stretch-full.img
+imgurl20190408=http://downloads.raspberrypi.org/raspbian_full/images/raspbian_full-2019-04-09/2019-04-08-raspbian-stretch-full.zip
+
+# Desktop Full Info
+# Raspberry Pi reference 2018-11-13
+# Generated using pi-gen, https://github.com/RPi-Distro/pi-gen, 7e0c786c641ba15990b5662f092c106beed40c9f, stage5
+# 
+# Firmware: https://github.com/raspberrypi/firmware/tree/12e0bf86e08d6067372bc0a45d7e8a10d3113210
+# Kernel: https://github.com/raspberrypi/linux/tree/36612d5d7a88672a3e7dd6cb458dbbbca0d75efe
+# Uname string: Linux version 4.14.79-v7+ (dc4@dc4-XPS13-9333) (gcc version 4.9.3 (crosstool-NG crosstool-ng-1.22.0-88-g8460611)) #1159 SMP Sun Nov 4 17:50:20 GMT 2018
+# 
+imgname20181113=2018-11-13-raspbian-stretch-full.img
+imgurl20181113=http://downloads.raspberrypi.org/raspbian_full/images/raspbian_full-2018-11-15/2018-11-13-raspbian-stretch-full.zip
+
+
+# addtional kernel versions
+
+kernelversion20200114=4.19.93-v7l+
+kernelbranch20200114=raspberrypi-kernel_1.20200114-1
+kernel4.19.93-v7l+branch=raspberrypi-kernel_1.20200114-1
+
+# kernelversion20200717=5.4.51-v7l+
+# kernelbranch20200717=raspberrypi-kernel_1.20200717-1
+# kernel5.4.51-v7l+branch=raspberrypi-kernel_1.20200717-1
+
+# kernelversion20200723=5.4.51-v7l+
+# kernelbranch20200723=raspberrypi-kernel_1.20200723-1
+# kernel5.4.51-v7l+branch=raspberrypi-kernel_1.20200723-1
+
+# kernelversion20200819=5.4.51-v7l+
+# kernelbranch20200819=raspberrypi-kernel_1.20200819-1
+# kernel5.4.51-v7l+branch=raspberrypi-kernel_1.20200819-1
+
+# kernelversion20200902=5.4.51-v7l+
+# kernelbranch20200902=raspberrypi-kernel_1.20200902-1
+# kernel5.4.51-v7l+branch=raspberrypi-kernel_1.20200902-1
+
+kernelversion20201022=5.4.72-v7l+
+kernelbranch20201022=raspberrypi-kernel_1.20201022-1
+kernel5.4.72-v7l+branch=raspberrypi-kernel_1.20201022-1
+

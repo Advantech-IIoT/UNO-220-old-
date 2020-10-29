@@ -1,0 +1,19 @@
+#!/bin/bash
+echo "__name__: ${BASH_SOURCE[0]}"
+# if [ ${RUNLEVEL:-x} == "x" ] || [ $RUNLEVEL -ne 1 ] ; then
+#   depmod -a
+#   udevadm control --reload-rules && udevadm trigger
+#   modprobe i2c_dev
+#   modprobe rtc_rx8010
+#   echo "rx8010 0x32" > /sys/class/i2c-adapter/i2c-1/new_device
+# else
+#   depmod -b / __kernel_version__ -A -a 
+# fi
+
+# RUNLEVEL is not 1
+if [ ${RUNLEVEL:-x} == "x" ] || [ $RUNLEVEL -ne 1 ] ; then
+  depmod -a
+# RUNLEVEL is 1
+else
+  depmod -b / __kernel_version__ -A -a 
+fi

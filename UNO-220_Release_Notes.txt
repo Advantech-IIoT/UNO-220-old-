@@ -1,7 +1,7 @@
 ##################################################################
-#                   UNO-220 Raspbian Image                       #
+#             UNO-220 Raspberry Pi 4 Image Builder               #
 #                        Release Notes                           #
-#                Version: 0.0.1 Date: 2020/03/02                 #
+#                Version: 0.0.2 Date: 2020/10/27                 #
 ##################################################################
 ------------------------------------------------------------------
  Feature List 
@@ -9,59 +9,32 @@
  - RTC-RX8010
  - TI TCA9554 IO extender
  - Serial to RS-232/485
- - Based on 2019-09-26-raspbian-buster-full.img
+ - Based on 2020-08-20-raspios-buster-armhf-full.img
 ------------------------------------------------------------------
  Change List
+ - Version 0.0.2 (2020/10/27): 
+   - RTC driver supports for multiple kernel versions and the latest version 1.20201022-1. 
+   - Add Debian packages for rtc, serial and gpio. 
+ - Version 0.0.1 (2020/10/23): 
+   - Image base changed to 2020-08-20-raspios-buster-armhf-full.img. 
  - Version 0.0.1 (2020/04/30): 
-   - Enable hdmi_force_hotplug in configs.txt
+   - Enable hdmi_force_hotplug in configs.txt. 
  - Version 0.0.1 (2020/03/02): 
    - Fix the system time not synchronized with realtime clock hardware when boot-up. 
  - Version 0.0.1 (2020/02/10): 
    - Enable SSH server by default.  
    - Create Raspbian full image for Advantech UNO-220 IO Board. 
 ------------------------------------------------------------------
- File List
+ Image Builder Usage
 
-   ├── define.mk                                      # defined function
-   ├── macro.mk                                       # variables
-   ├── Makefile                                       # Makefile
-   ├── mountimage.sh
-   ├── writesdimage.sh
-   └── files
-       ├── boot                                       # boot backup files
-       │   ├── cmdline.txt
-       │   └── config.txt
-       └── root                                       # root files for uno-220
-           ├── etc
-           │   ├── modules-load.d
-           │   │   ├── gpio-i2c.conf
-           │   │   └── rtc-i2c.conf
-           │   ├── udev
-           │   │   └── rules.d
-           │   │       ├── 50-i2c_gpio.rules
-           │   │       └── 50-i2c_rtc.rules
-           │   └── version
-           └── usr
-               └── sbin
-                   ├── uno220gpio
-                   ├── uno220uart
-                   ├── uno220uartrecv
-                   └── uno220uartsend
-  
-------------------------------------------------------------------
- Build Image Guide 
-
- - https://advantech-iiot.github.io/uno-220/
+ $ make help
 
 ------------------------------------------------------------------
  Write image to SD card
 
- - Please check your SD card device in your system, the naming rule 
-   will be /dev/sdx. This following example is to use /dev/sde.
+ # Write image to your micro SD card command. 
 
-   # Write image to your micro SD card command. 
-
-   $ ./scripts/writesdimage.sh -d /dev/sde -i build/2019-09-26-raspbian-buster-full.img
+ $ make write_sd
 
 ------------------------------------------------------------------
  How to test UNO-220

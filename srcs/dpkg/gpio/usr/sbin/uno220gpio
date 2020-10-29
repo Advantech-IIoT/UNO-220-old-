@@ -1,0 +1,238 @@
+#!/bin/bash
+app=$(basename $0)
+pattern='\(1-0027\|pca9554\)'
+label=$(ls /sys/class/gpio/gpiochip*/label | xargs grep -l -e $pattern)
+pins=8
+gpiodir=$([ ${label:-x} == "x" ] || dirname $label)
+if [ ${gpiodir:-x} == "x" ] ; then
+  echo GPIO expander is not ready!! Please check the driver or bus....
+  echo Bye!!
+  exit 0; 
+fi
+base=$(cat $gpiodir/base)
+usage(){
+cat << EOF
+  Usage: 
+    $app --export=[all|0~$(($pins - 1))]                  # Export GPIO
+    $app --unexport=[all|0~$(($pins - 1))]                # Unexport GPIO
+    $app --pin=[0~$(($pins - 1))] --direction=[in|out]    # Set GPIO Direction
+    $app --pin=[0~$(($pins - 1))]                         # GPIO Read Operation
+    $app --pin=[0~$(($pins - 1))] --value=[0|1]           # GPIO Write Operation
+    $app --status
+EOF
+  exit 0; 
+}
+while getopts "e:p:o:sh-:" o; do
+  case $o in
+    -)
+      val=${OPTARG#*=}
+      opt=${OPTARG%=$val}
+      val=${OPTARG#$opt}
+      val=${val/=/}
+      case $opt in
+        export)
+          [ "$val" == "" ] && usage
+	  export=$val
+	;;
+        unexport)
+          [ "$val" == "" ] && usage
+	  unexport=$val
+	;;
+        pin)
+          [ "$val" == "" ] && usage
+	  pin=$val
+	;;
+        direction)
+	  direction=$val
+          [ "$val" == "" ] && direction=dump
+	;;
+        value)
+          [ "$val" == "" ] && usage
+	  value=$val
+	;;
+        status)
+          status=1
+	;;
+        *)
+          usage
+	;;
+      esac
+      ;;
+    h)
+      usage
+      ;;
+    e)
+      export=$OPTARG
+      #echo "$o, ind='$OPTIND', arg='$OPTARG'"
+      ;;
+    *)
+      #echo "$o, ind='$OPTIND', arg='$OPTARG', err='$OPTERR'"
+      usage
+      ;;
+  esac
+done
+shift $((OPTIND-1))
+[ "$#" -ne 0 ] && usage
+dumpInfo(){
+  echo "############################################"
+  echo gpiodir=$gpiodir
+  echo base=$base
+  echo export=$export
+  echo direction=$direction
+  echo pin=$pin
+  echo "############################################"
+}
+exportPin(){
+  [ ! -d "/sys/class/gpio/gpio$(($base + $1))" ] && (
+    echo $(($base + $1)) > /sys/class/gpio/export
+  )
+}
+unexportPin(){
+  [ -d "/sys/class/gpio/gpio$(($base + $1))" ] && (
+    echo $(($base + $1)) > /sys/class/gpio/unexport
+  )
+}
+directionPin(){
+  [ ! -d "/sys/class/gpio/gpio$(($base + $1))" ] && exportPin $1
+  if [ "$2" != "" ]; then
+    echo ${2} > /sys/class/gpio/gpio$(($base + $1))/direction
+  else
+    cat /sys/class/gpio/gpio$(($base + $1))/direction
+  fi
+}
+valuePin(){
+  [ ! -d "/sys/class/gpio/gpio$(($base + $1))" ] && exportPin $1
+  if [ "$2" != "" ]; then
+    echo ${2} > /sys/class/gpio/gpio$(($base + $1))/value
+  else
+    cat /sys/class/gpio/gpio$(($base + $1))/value
+  fi
+}
+exportAllPins(){
+  for((i=0; i<$pins; i++)); do
+    unexportPin $i
+    exportPin $i
+  done
+}
+unexportAllPins(){
+  for((i=0; i<$pins; i++)); do
+    unexportPin $i
+  done
+}
+checknumber(){
+  re='^[0-9]+$'
+  if ! [[ $1 =~ $re ]] ; then
+    echo 1
+  else
+    echo 0
+  fi
+}
+dumpStatus(){
+  printf " %-10s|" "pin" 
+  for((i=0;i<$pins;i++)){
+    printf "%4d" "$i"
+  }
+  printf "\n"
+  eval "printf \"%0.s-\" {1..$(( 13 + 4 * $pins))}"
+  printf "\n"
+  printf " %-10s|" "export" 
+  for((i=0;i<$pins;i++)){
+    [ ! -d "/sys/class/gpio/gpio$(($base + $i))" ] && printf "%4d" "0" || printf "%4d" "1"
+  }
+  printf "\n"
+  printf " %-10s|" "direction" 
+  for((i=0;i<$pins;i++)){
+    [ ! -d "/sys/class/gpio/gpio$(($base + $i))" ] && printf "%4s" "X" || (
+      if [ "$(cat /sys/class/gpio/gpio$(($base + $i))/direction)" == "out" ] ; then
+        printf "%4s" "O"
+      else
+        printf "%4s" "I"
+      fi
+    )
+  }
+  printf "\n"
+  printf " %-10s|" "value"
+  for((i=0;i<$pins;i++)){
+    [ ! -d "/sys/class/gpio/gpio$(($base + $i))" ] && printf "%4s" "X" || (
+      printf "%4d" "$(cat /sys/class/gpio/gpio$(($base + $i))/value)"
+    )
+  }
+  printf "\n"
+}
+[ "$status" == "1" ] && dumpStatus && exit 0; 
+# dumpInfo
+if [ "$export" != "" ] ; then 
+  case $export in
+    all)
+      exportAllPins
+      exit 0;
+    ;;
+    *)
+      re='^[0-9]+$'
+      if ! [[ $export =~ $re ]] ; then
+        echo "error: Not a number" >&2; exit 1
+      else
+        exportPin $export
+        exit 0;
+      fi
+    ;;
+  esac
+fi
+if [ "$unexport" != "" ] ; then 
+  case $unexport in
+    all)
+      unexportAllPins
+      exit 0;
+    ;;
+    *)
+      re='^[0-9]+$'
+      if ! [[ $unexport =~ $re ]] ; then
+        echo "error: Not a number" >&2; exit 1
+      else
+        unexportPin $unexport
+        exit 0;
+      fi
+    ;;
+  esac
+fi
+if [ "$direction" != "" ] ; then 
+  case $direction in
+    in)
+      ret=$(checknumber $pin)
+      [ "$ret" != "0" ] && usage
+      directionPin $pin $direction
+      exit 0;
+    ;;
+    out)
+      ret=$(checknumber $pin)
+      [ "$ret" != "0" ] && usage
+      directionPin $pin $direction
+      exit 0;
+    ;;
+    dump)
+      ret=$(checknumber $pin)
+      [ "$ret" != "0" ] && usage
+      _dir=$(directionPin $pin)
+      printf "pin %d direction: %s\n" "$pin" "$_dir"
+      exit 0;
+    ;;
+    *)
+      usage
+    ;;
+  esac
+fi
+if [ "$pin" != "" ] ; then 
+  ret=$(checknumber $pin)
+  [ "$ret" != "0" ] && usage
+  if [ "$value" != "" ] ; then 
+    ret=$(checknumber $value)
+    [ "$ret" != "0" ] && usage
+    valuePin $pin $value
+    exit 0;
+  else
+    _val=$(valuePin $pin)
+    printf "pin %d value: %d\n" "$pin" "$_val"
+    exit 0;
+  fi
+fi
+dumpStatus

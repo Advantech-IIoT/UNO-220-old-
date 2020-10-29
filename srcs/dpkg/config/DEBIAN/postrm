@@ -1,0 +1,2 @@
+#!/bin/bash
+echo "__name__: ${BASH_SOURCE[0]}"
